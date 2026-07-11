@@ -27,7 +27,7 @@ describe("GetInstanceConfig Usecase", () => {
 		const service = makeInstanceConfigService({ repository, cache });
 		const usecase = makeGetInstanceConfigUsecase({ service });
 
-		const savedConfig: InstanceConfig = {};
+		const savedConfig: InstanceConfig = { registrationEnabled: true };
 		await repository.save({ config: savedConfig });
 
 		const result = await usecase();
@@ -42,7 +42,7 @@ describe("GetInstanceConfig Usecase", () => {
 		const service = makeInstanceConfigService({ repository, cache });
 		const usecase = makeGetInstanceConfigUsecase({ service });
 
-		const cachedConfig: InstanceConfig = {};
+		const cachedConfig: InstanceConfig = { registrationEnabled: true };
 		await cache.set("instance-config", cachedConfig);
 
 		const result = await usecase();

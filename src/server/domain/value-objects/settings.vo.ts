@@ -2,11 +2,15 @@ import * as z from "zod";
 import { languageCodeTuple } from "@/client/languages";
 import { SafeSearch } from "./search.vo";
 
-export const instanceConfigSchema = z.object({});
+export const instanceConfigSchema = z.object({
+	registrationEnabled: z.boolean().default(false),
+});
 
 export type InstanceConfig = z.infer<typeof instanceConfigSchema>;
 
-export const defaultInstanceConfig: InstanceConfig = {};
+export const defaultInstanceConfig: InstanceConfig = {
+	registrationEnabled: false,
+};
 
 export const userSettingsSchema = z.object({
 	safeSearch: z

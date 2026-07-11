@@ -14,6 +14,12 @@ export const auth = betterAuth({
 	emailAndPassword: {
 		enabled: true,
 		autoSignIn: true,
+		// Disable the default /api/auth/sign-up/email HTTP endpoint. Public
+		// sign-ups go through our /signup route, which checks the runtime
+		// `registrationEnabled` flag on the instance config and calls
+		// `auth.api.createUser` server-side with role="user" hardcoded.
+		// Setup / admin-created users continue to work via the admin plugin.
+		disableSignUp: true,
 		minPasswordLength: 8,
 		maxPasswordLength: 128,
 	},

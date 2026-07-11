@@ -96,6 +96,50 @@ export const en = {
 
 			safeSearch: "Safe Search",
 			openInNewTab: "Open results in new tab",
+
+			// Users (admin only)
+			users: {
+				title: "Users",
+				description: "Manage accounts and public sign-up",
+				registrationTitle: "Public sign-up",
+				registrationDescription:
+					"When enabled, anyone can create a non-admin account from the login page",
+				registrationToggle: "Allow public sign-up",
+				createTitle: "Add user",
+				createDescription: "Create a non-admin account with a fixed password",
+				name: "Name",
+				email: "Email",
+				password: "Password",
+				role: "Role",
+				create: "Add user",
+				creating: "Adding...",
+				createSuccess: "User created",
+				createError: "Failed to create user",
+				listTitle: "Existing users",
+				listDescription: "All accounts on this instance",
+				empty: "No users yet",
+				delete: "Delete",
+				deleteTitle: "Delete user",
+				deleteConfirm:
+					"Delete {{email}}? This removes their account and cannot be undone.",
+				deleteSuccess: "User deleted",
+				deleteError: "Failed to delete user",
+			},
+		},
+		login: {
+			noAccount: "Don't have an account?",
+			signUpLink: "Sign up",
+		},
+		signup: {
+			title: "Create your account",
+			subtitle: "Sign up to start searching",
+			name: "Name",
+			email: "Email",
+			password: "Password",
+			submit: "Create account",
+			creating: "Creating...",
+			haveAccount: "Already have an account?",
+			loginLink: "Log in",
 		},
 		safeSearch: {
 			off: "Off",

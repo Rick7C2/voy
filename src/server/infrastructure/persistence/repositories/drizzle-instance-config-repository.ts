@@ -24,10 +24,12 @@ export function makeDrizzleInstanceConfigRepository({
 				return null;
 			}
 
-			return {};
+			return {
+				registrationEnabled: result[0].registrationEnabled,
+			};
 		},
 
-		async save(_: { config: InstanceConfig }): Promise<void> {
+		async save({ config }: { config: InstanceConfig }): Promise<void> {
 			const now = new Date();
 
 			const existing = await db
@@ -40,12 +42,14 @@ export function makeDrizzleInstanceConfigRepository({
 				await db
 					.update(instanceConfig)
 					.set({
+						registrationEnabled: config.registrationEnabled,
 						updatedAt: now,
 					})
 					.where(eq(instanceConfig.id, CONFIG_ID));
 			} else {
 				await db.insert(instanceConfig).values({
 					id: CONFIG_ID,
+					registrationEnabled: config.registrationEnabled,
 					updatedAt: now,
 				});
 			}

@@ -1,0 +1,1 @@
+ALTER TABLE `instance_config` ADD `registrationEnabled` integer DEFAULT false NOT NULL;

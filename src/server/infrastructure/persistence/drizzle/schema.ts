@@ -76,6 +76,9 @@ export const verification = sqliteTable("verification", {
 
 export const instanceConfig = sqliteTable("instance_config", {
 	id: integer("id").primaryKey().default(1),
+	registrationEnabled: integer("registrationEnabled", { mode: "boolean" })
+		.default(false)
+		.notNull(),
 	updatedAt: integer("updatedAt", { mode: "timestamp" }).notNull(),
 });
 

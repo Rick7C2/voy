@@ -97,6 +97,51 @@ export const fr = {
 
 			safeSearch: "Safe Search",
 			openInNewTab: "Ouvrir les résultats dans un nouvel onglet",
+
+			// Utilisateurs (admin uniquement)
+			users: {
+				title: "Utilisateurs",
+				description: "Gérer les comptes et l'inscription publique",
+				registrationTitle: "Inscription publique",
+				registrationDescription:
+					"Lorsque activée, n'importe qui peut créer un compte non-admin depuis la page de connexion",
+				registrationToggle: "Autoriser l'inscription publique",
+				createTitle: "Ajouter un utilisateur",
+				createDescription:
+					"Créer un compte non-admin avec un mot de passe défini",
+				name: "Nom",
+				email: "Email",
+				password: "Mot de passe",
+				role: "Rôle",
+				create: "Ajouter",
+				creating: "Ajout...",
+				createSuccess: "Utilisateur créé",
+				createError: "Échec de la création",
+				listTitle: "Utilisateurs existants",
+				listDescription: "Tous les comptes de cette instance",
+				empty: "Aucun utilisateur",
+				delete: "Supprimer",
+				deleteTitle: "Supprimer l'utilisateur",
+				deleteConfirm:
+					"Supprimer {{email}} ? Cela retire son compte et est irréversible.",
+				deleteSuccess: "Utilisateur supprimé",
+				deleteError: "Échec de la suppression",
+			},
+		},
+		login: {
+			noAccount: "Pas de compte ?",
+			signUpLink: "S'inscrire",
+		},
+		signup: {
+			title: "Créer votre compte",
+			subtitle: "Inscrivez-vous pour commencer à chercher",
+			name: "Nom",
+			email: "Email",
+			password: "Mot de passe",
+			submit: "Créer le compte",
+			creating: "Création...",
+			haveAccount: "Vous avez déjà un compte ?",
+			loginLink: "Se connecter",
 		},
 		safeSearch: {
 			off: "Désactivé",

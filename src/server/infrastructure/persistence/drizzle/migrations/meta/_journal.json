@@ -15,6 +15,13 @@
 			"when": 1772174985749,
 			"tag": "0001_damp_valkyrie",
 			"breakpoints": true
+		},
+		{
+			"idx": 2,
+			"version": "6",
+			"when": 1783738241191,
+			"tag": "0002_add_instance_config_registration_enabled",
+			"breakpoints": true
 		}
 	]
 }

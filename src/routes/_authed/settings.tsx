@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { Button } from "@/client/components/ui/button";
 import { normalizeLanguageCode } from "@/client/languages";
 import { sessionQueryOptions } from "@/routes/_authed";
+import { defaultInstanceConfig } from "@/server/domain/value-objects";
 import {
 	getInstanceConfig,
 	type InstanceConfig,
@@ -93,7 +94,7 @@ function SettingsLayout() {
 	const [userSettings, setUserSettings] =
 		useState<UserSettings>(initialUserSettings);
 	const [instanceConfig, setInstanceConfig] = useState<InstanceConfig | null>(
-		initialInstanceConfig ?? {},
+		initialInstanceConfig ?? defaultInstanceConfig,
 	);
 	const [isSaving, setIsSaving] = useState(false);
 

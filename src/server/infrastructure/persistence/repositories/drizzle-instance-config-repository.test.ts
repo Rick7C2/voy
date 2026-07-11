@@ -20,7 +20,7 @@ describe("DrizzleInstanceConfigRepository", () => {
 	});
 
 	it("should save and retrieve instance config", async () => {
-		const config: InstanceConfig = {};
+		const config: InstanceConfig = { registrationEnabled: true };
 
 		// First save (insert)
 		await repository.save({ config });
@@ -40,17 +40,16 @@ describe("DrizzleInstanceConfigRepository", () => {
 	});
 
 	it("should update existing config", async () => {
-		const config: InstanceConfig = {};
-
-		await repository.save({ config });
+		await repository.save({ config: { registrationEnabled: false } });
 
 		// Wait a bit to ensure timestamp changes
 		await new Promise((resolve) => setTimeout(resolve, 10));
 
-		await repository.save({ config });
+		await repository.save({ config: { registrationEnabled: true } });
 
 		const rows = await db.select().from(schema.instanceConfig);
 		expect(rows).toHaveLength(1);
+		expect(rows[0].registrationEnabled).toBe(true);
 		expect(rows[0].updatedAt).toBeInstanceOf(Date);
 	});
 });

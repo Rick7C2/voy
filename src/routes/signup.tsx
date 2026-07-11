@@ -1,52 +1,32 @@
 import { createFileRoute, getRouteApi, redirect } from "@tanstack/react-router";
 import { GalleryVerticalEndIcon } from "lucide-react";
-import { LoginForm } from "@/routes/login/-components/login-form";
+import { SignUpForm } from "@/routes/signup/-components/signup-form";
 import { getRegistrationStatus } from "@/server/infrastructure/functions/public-signup";
 import { getSetupStatus } from "@/server/infrastructure/functions/setup";
 
 const rootRoute = getRouteApi("__root__");
 
-function getSafeRedirect({
-	redirect,
-}: {
-	redirect: unknown;
-}): string | undefined {
-	if (typeof redirect !== "string") {
-		return undefined;
-	}
-
-	// Only allow in-app absolute paths.
-	if (!redirect.startsWith("/") || redirect.startsWith("//")) {
-		return undefined;
-	}
-
-	return redirect;
-}
-
-export const Route = createFileRoute("/login")({
+export const Route = createFileRoute("/signup")({
 	loader: async () => {
 		const { setupRequired } = await getSetupStatus();
-
 		if (setupRequired) {
 			throw redirect({ to: "/setup" });
 		}
 
 		const { registrationEnabled } = await getRegistrationStatus();
+		if (!registrationEnabled) {
+			throw redirect({ to: "/login", search: { redirect: undefined } });
+		}
 
-		return { setupComplete: true, registrationEnabled };
+		return { registrationEnabled };
 	},
-	validateSearch: (search: Record<string, unknown>) => ({
-		redirect: getSafeRedirect({ redirect: search.redirect }),
-	}),
 	head: () => ({
-		meta: [{ title: "Login" }],
+		meta: [{ title: "Sign Up" }],
 	}),
-	component: LoginPage,
+	component: SignUpPage,
 });
 
-function LoginPage() {
-	const { redirect: redirectTo } = Route.useSearch();
-	const { registrationEnabled } = Route.useLoaderData();
+function SignUpPage() {
 	const { instanceName } = rootRoute.useLoaderData();
 
 	return (
@@ -62,17 +42,14 @@ function LoginPage() {
 				</div>
 				<div className="flex flex-1 items-center justify-center">
 					<div className="w-full max-w-xs">
-						<LoginForm
-							redirectTo={redirectTo}
-							registrationEnabled={registrationEnabled}
-						/>
+						<SignUpForm />
 					</div>
 				</div>
 			</div>
 			<div className="bg-muted relative hidden lg:block">
 				<img
 					src="/light.jpg"
-					alt="Login page background"
+					alt="Sign-up page background"
 					className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
 				/>
 			</div>

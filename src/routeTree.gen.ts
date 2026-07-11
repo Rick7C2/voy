@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SignupRouteImport } from './routes/signup'
 import { Route as SetupRouteImport } from './routes/setup'
 import { Route as OpensearchDotxmlRouteImport } from './routes/opensearch[.]xml'
 import { Route as LoginRouteImport } from './routes/login'
@@ -21,6 +22,7 @@ import { Route as AuthedSettingsRouteImport } from './routes/_authed/settings'
 import { Route as AuthedSettingsIndexRouteImport } from './routes/_authed/settings/index'
 import { Route as AuthedSearchIndexRouteImport } from './routes/_authed/search/index'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
+import { Route as AuthedSettingsUsersRouteImport } from './routes/_authed/settings/users'
 import { Route as AuthedSettingsSearchRouteImport } from './routes/_authed/settings/search'
 import { Route as AuthedSettingsPrivacyRouteImport } from './routes/_authed/settings/privacy'
 import { Route as AuthedSettingsGeneralRouteImport } from './routes/_authed/settings/general'
@@ -28,6 +30,11 @@ import { Route as AuthedSettingsAppearanceRouteImport } from './routes/_authed/s
 import { Route as AuthedSettingsApiRouteImport } from './routes/_authed/settings/api'
 import { Route as AuthedSettingsAboutRouteImport } from './routes/_authed/settings/about'
 
+const SignupRoute = SignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SetupRoute = SetupRouteImport.update({
   id: '/setup',
   path: '/setup',
@@ -87,6 +94,11 @@ const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   path: '/api/auth/$',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthedSettingsUsersRoute = AuthedSettingsUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => AuthedSettingsRoute,
+} as any)
 const AuthedSettingsSearchRoute = AuthedSettingsSearchRouteImport.update({
   id: '/search',
   path: '/search',
@@ -124,6 +136,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/opensearch.xml': typeof OpensearchDotxmlRoute
   '/setup': typeof SetupRoute
+  '/signup': typeof SignupRoute
   '/settings': typeof AuthedSettingsRouteWithChildren
   '/api/health': typeof ApiHealthRoute
   '/api/search': typeof ApiSearchRoute
@@ -134,6 +147,7 @@ export interface FileRoutesByFullPath {
   '/settings/general': typeof AuthedSettingsGeneralRoute
   '/settings/privacy': typeof AuthedSettingsPrivacyRoute
   '/settings/search': typeof AuthedSettingsSearchRoute
+  '/settings/users': typeof AuthedSettingsUsersRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/search/': typeof AuthedSearchIndexRoute
   '/settings/': typeof AuthedSettingsIndexRoute
@@ -142,6 +156,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/opensearch.xml': typeof OpensearchDotxmlRoute
   '/setup': typeof SetupRoute
+  '/signup': typeof SignupRoute
   '/api/health': typeof ApiHealthRoute
   '/api/search': typeof ApiSearchRoute
   '/api/suggest': typeof ApiSuggestRoute
@@ -152,6 +167,7 @@ export interface FileRoutesByTo {
   '/settings/general': typeof AuthedSettingsGeneralRoute
   '/settings/privacy': typeof AuthedSettingsPrivacyRoute
   '/settings/search': typeof AuthedSettingsSearchRoute
+  '/settings/users': typeof AuthedSettingsUsersRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/search': typeof AuthedSearchIndexRoute
   '/settings': typeof AuthedSettingsIndexRoute
@@ -162,6 +178,7 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/opensearch.xml': typeof OpensearchDotxmlRoute
   '/setup': typeof SetupRoute
+  '/signup': typeof SignupRoute
   '/_authed/settings': typeof AuthedSettingsRouteWithChildren
   '/api/health': typeof ApiHealthRoute
   '/api/search': typeof ApiSearchRoute
@@ -173,6 +190,7 @@ export interface FileRoutesById {
   '/_authed/settings/general': typeof AuthedSettingsGeneralRoute
   '/_authed/settings/privacy': typeof AuthedSettingsPrivacyRoute
   '/_authed/settings/search': typeof AuthedSettingsSearchRoute
+  '/_authed/settings/users': typeof AuthedSettingsUsersRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/_authed/search/': typeof AuthedSearchIndexRoute
   '/_authed/settings/': typeof AuthedSettingsIndexRoute
@@ -184,6 +202,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/opensearch.xml'
     | '/setup'
+    | '/signup'
     | '/settings'
     | '/api/health'
     | '/api/search'
@@ -194,6 +213,7 @@ export interface FileRouteTypes {
     | '/settings/general'
     | '/settings/privacy'
     | '/settings/search'
+    | '/settings/users'
     | '/api/auth/$'
     | '/search/'
     | '/settings/'
@@ -202,6 +222,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/opensearch.xml'
     | '/setup'
+    | '/signup'
     | '/api/health'
     | '/api/search'
     | '/api/suggest'
@@ -212,6 +233,7 @@ export interface FileRouteTypes {
     | '/settings/general'
     | '/settings/privacy'
     | '/settings/search'
+    | '/settings/users'
     | '/api/auth/$'
     | '/search'
     | '/settings'
@@ -221,6 +243,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/opensearch.xml'
     | '/setup'
+    | '/signup'
     | '/_authed/settings'
     | '/api/health'
     | '/api/search'
@@ -232,6 +255,7 @@ export interface FileRouteTypes {
     | '/_authed/settings/general'
     | '/_authed/settings/privacy'
     | '/_authed/settings/search'
+    | '/_authed/settings/users'
     | '/api/auth/$'
     | '/_authed/search/'
     | '/_authed/settings/'
@@ -242,6 +266,7 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   OpensearchDotxmlRoute: typeof OpensearchDotxmlRoute
   SetupRoute: typeof SetupRoute
+  SignupRoute: typeof SignupRoute
   ApiHealthRoute: typeof ApiHealthRoute
   ApiSearchRoute: typeof ApiSearchRoute
   ApiSuggestRoute: typeof ApiSuggestRoute
@@ -250,6 +275,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/setup': {
       id: '/setup'
       path: '/setup'
@@ -334,6 +366,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAuthSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authed/settings/users': {
+      id: '/_authed/settings/users'
+      path: '/users'
+      fullPath: '/settings/users'
+      preLoaderRoute: typeof AuthedSettingsUsersRouteImport
+      parentRoute: typeof AuthedSettingsRoute
+    }
     '/_authed/settings/search': {
       id: '/_authed/settings/search'
       path: '/search'
@@ -386,6 +425,7 @@ interface AuthedSettingsRouteChildren {
   AuthedSettingsGeneralRoute: typeof AuthedSettingsGeneralRoute
   AuthedSettingsPrivacyRoute: typeof AuthedSettingsPrivacyRoute
   AuthedSettingsSearchRoute: typeof AuthedSettingsSearchRoute
+  AuthedSettingsUsersRoute: typeof AuthedSettingsUsersRoute
   AuthedSettingsIndexRoute: typeof AuthedSettingsIndexRoute
 }
 
@@ -396,6 +436,7 @@ const AuthedSettingsRouteChildren: AuthedSettingsRouteChildren = {
   AuthedSettingsGeneralRoute: AuthedSettingsGeneralRoute,
   AuthedSettingsPrivacyRoute: AuthedSettingsPrivacyRoute,
   AuthedSettingsSearchRoute: AuthedSettingsSearchRoute,
+  AuthedSettingsUsersRoute: AuthedSettingsUsersRoute,
   AuthedSettingsIndexRoute: AuthedSettingsIndexRoute,
 }
 
@@ -423,6 +464,7 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   OpensearchDotxmlRoute: OpensearchDotxmlRoute,
   SetupRoute: SetupRoute,
+  SignupRoute: SignupRoute,
   ApiHealthRoute: ApiHealthRoute,
   ApiSearchRoute: ApiSearchRoute,
   ApiSuggestRoute: ApiSuggestRoute,

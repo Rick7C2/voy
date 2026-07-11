@@ -1,9 +1,18 @@
 import { Link, useLocation } from "@tanstack/react-router";
-import { Info, Key, Palette, Search, Settings, Shield } from "lucide-react";
+import {
+	Info,
+	Key,
+	Palette,
+	Search,
+	Settings,
+	Shield,
+	Users,
+} from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 export type SettingsSection =
 	| "api"
+	| "users"
 	| "general"
 	| "appearance"
 	| "search"
@@ -19,7 +28,15 @@ const adminNavItems: {
 	label: string;
 	icon: React.ComponentType<{ className?: string }>;
 	route: string;
-}[] = [{ id: "api", label: "settings.api", icon: Key, route: "/settings/api" }];
+}[] = [
+	{ id: "api", label: "settings.api", icon: Key, route: "/settings/api" },
+	{
+		id: "users",
+		label: "settings.users.title",
+		icon: Users,
+		route: "/settings/users",
+	},
+];
 
 const userNavItems: {
 	id: SettingsSection;
